@@ -1,31 +1,4 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@FayzullayevImomali 
-abarna-codespot
-/
-A-simple-Calculator
-Public
-Code
-Issues
-6
-Pull requests
-11
-Actions
-Projects
-Security
-Insights
-A-simple-Calculator/script.js /
-@abarna-codespot
-abarna-codespot Add files via upload
-Latest commit 3a698e3 on 17 May 2018
- History
- 1 contributor
-78 lines (77 sloc)  1.95 KB
+
 
 function getHistory(){
 	return document.getElementById("history-value").innerText;

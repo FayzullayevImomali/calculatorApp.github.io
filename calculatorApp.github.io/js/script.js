@@ -47,7 +47,8 @@ const calculator = {
     firstValue: '',
     secondValue: '',
     operator: '',
-    displayValue: ''
+    displayValue: '',
+    result: ''
 }
 
 // function inputDecimal(dot) {
@@ -64,7 +65,7 @@ const calculator = {
 
 numbers.forEach((btns, items) => {
     btns.addEventListener('click', function () {
-        calculator.displayValue += this.id
+        calculator.displayValue += this.value
         // console.log(calculator.firstValue)
         currentOperand.textContent = calculator.displayValue
     });
@@ -85,6 +86,7 @@ operators.forEach((operator, item) => {
        calculator.firstValue = Number(calculator.displayValue);
        historyOperand.textContent = calculator.firstValue;
        currentOperand.textContent = '';
+       calculator.displayValue.textContent = '';
        calculator.operator += this.value;
        console.log(this.value);
     })
@@ -92,9 +94,8 @@ operators.forEach((operator, item) => {
 
 
 equal.addEventListener('click', function(){
-    calculator.displayValue = '';
     
-})
+});
 
 
 

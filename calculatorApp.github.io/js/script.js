@@ -83,18 +83,36 @@ dotBtn.addEventListener('click', function(event) {
 
 operators.forEach((operator, item) => {
     operator.addEventListener('click', function(btns, items) {
-       calculator.firstValue = Number(calculator.displayValue);
-       historyOperand.textContent = calculator.firstValue;
-       currentOperand.textContent = '';
-       calculator.displayValue.textContent = '';
-       calculator.operator += this.value;
-       console.log(this.value);
+       if(calculator.operator === '' && calculator.displayValue !== '') {
+        calculator.firstValue = Number(calculator.displayValue);
+        historyOperand.textContent = calculator.firstValue;
+        currentOperand.textContent = '';
+        calculator.displayValue = '';
+        calculator.operator += this.value;
+        console.log(calculator.operator);
+        console.log( typeof(calculator.operator));
+       }
     })
 });
 
 
 equal.addEventListener('click', function(){
-    
+    calculator.secondValue = Number(calculator.displayValue);
+    console.log(typeof(calculator.secondValue))
+    if(calculator.operator === '-') {
+        calculator.result = calculator.firstValue - calculator.secondValue;
+        historyOperand.textContent = '';
+        currentOperand.textContent = calculator.result
+        console.log(calculator.result);
+    }
+
+    // if(calculator.firstValue === 'number' && calculator.secondValue === 'number') {
+    //     if(calculator.operator === '-') {
+    //         calculator.result = calculator.firstValue - calculator.secondValue;
+    //         console.log(calculator.result);
+    //     }    
+    // }
+
 });
 
 

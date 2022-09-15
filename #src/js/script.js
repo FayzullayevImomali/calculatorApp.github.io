@@ -14,34 +14,7 @@ let equal = document.querySelector('.equal');
 
 let historyNumber = '';
 let currentNumber = '';
-const numberArray = [0,0]
-
-
-
-// numbers.forEach((btns,item) => {
-//     btns.addEventListener('click', function() {
-//         currentNumber += this.id;
-//         currentOperand.textContent = Math.trunc(currentNumber);
-//         if(this.id === '.')  {
-//             currentNumber += this.value;
-//         }
-//     })
-// });
-
-// operators.forEach((btns) => {
-//     btns.addEventListener('click', function(event){
-//         if(currentNumber != '') {
-//             historyNumber = currentNumber;
-//             historyOperand.textContent = Math.trunc(historyNumber);
-//             currentNumber = '';
-//             currentOperand.textContent = '';
-//             if(this.id === '-' ) {
-//                 console.log('event minus');
-//             }
-//         }
-//     })
-// });
-
+let stopCalculate = true;
 
 const calculator = {
     firstValue: '',
@@ -51,24 +24,15 @@ const calculator = {
     result: ''
 }
 
-// function inputDecimal(dot) {
-//     // If the `displayValue` property does not contain a decimal point
-//     if (!calculator.firstValue.includes(dot)) {
-//       // Append the decimal point
-//       calculator.firstValue += dot;
-//     }
-// // };
-// inputDecimal(calculator.firstValue);
-
-
-
 
 numbers.forEach((btns, items) => {
-    btns.addEventListener('click', function () {
-        calculator.displayValue += this.value
-        // console.log(calculator.firstValue)
-        currentOperand.textContent = calculator.displayValue
-    });
+    if(stopCalculate === true) {
+        btns.addEventListener('click', function () {
+            calculator.displayValue += this.value
+            // console.log(calculator.firstValue)
+            currentOperand.textContent = calculator.displayValue
+        });
+    }
 });
 
 dotBtn.addEventListener('click', function(event) {
@@ -104,16 +68,33 @@ equal.addEventListener('click', function(){
         historyOperand.textContent = '';
         currentOperand.textContent = calculator.result
         console.log(calculator.result);
+        calculator.operator = '';
+        
+    } else if (calculator.operator === '+') {
+        calculator.result = calculator.firstValue + calculator.secondValue;
+        historyOperand.textContent = '';
+        currentOperand.textContent = calculator.result
+        console.log(calculator.result);
+        calculator.operator = '';
+        
+    } else if(calculator.operator === '/') {
+        calculator.result = calculator.firstValue / calculator.secondValue;
+        historyOperand.textContent = '';
+        currentOperand.textContent = calculator.result
+        console.log(calculator.result);
+        calculator.operator = '';
+       
+    } else if(calculator.operator === '*') {
+        calculator.result = calculator.firstValue * calculator.secondValue;
+        historyOperand.textContent = '';
+        currentOperand.textContent = calculator.result
+        console.log(calculator.result);
+        calculator.operator = '';
+       
     }
-
-    // if(calculator.firstValue === 'number' && calculator.secondValue === 'number') {
-    //     if(calculator.operator === '-') {
-    //         calculator.result = calculator.firstValue - calculator.secondValue;
-    //         console.log(calculator.result);
-    //     }    
-    // }
-
+   
 });
+
 
 
 

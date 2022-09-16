@@ -49,7 +49,7 @@ operators.forEach((operator, item) => {
     operator.addEventListener('click', function(btns, items) {
        if(calculator.operator === '' && calculator.displayValue !== '') {
         calculator.firstValue = Number(calculator.displayValue);
-        historyOperand.textContent = calculator.firstValue;
+        historyOperand.textContent = `${calculator.firstValue} ${this.value}`;
         currentOperand.textContent = '';
         calculator.displayValue = '';
         calculator.operator += this.value;

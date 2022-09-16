@@ -9,33 +9,98 @@ const numbers = document.querySelectorAll('.numbers');
 const operators = document.querySelectorAll('.operators');
 let currentOperand = document.querySelector('.current-operand');
 let historyOperand = document.querySelector('.previous-operand');
+let dotBtn = document.querySelector('.dot');
+let equal = document.querySelector('.equal');
 
-let historyNumber = 0;
-let currentNumber = 0;
-const numberArray = [0,0]
+let historyNumber = '';
+let currentNumber = '';
+let stopCalculate = true;
+
+const calculator = {
+    firstValue: '',
+    secondValue: '',
+    operator: '',
+    displayValue: '',
+    result: ''
+}
+
+
+numbers.forEach((btns, items) => {
+    if(stopCalculate === true) {
+        btns.addEventListener('click', function () {
+            calculator.displayValue += this.value
+            // console.log(calculator.firstValue)
+            currentOperand.textContent = calculator.displayValue
+        });
+    }
+});
+
+dotBtn.addEventListener('click', function(event) {
+    if(!calculator.displayValue.includes('.')) {
+        currentOperand.textContent += '.'
+        calculator.displayValue += '.'
+    }
+    
+});
 
 
 
-numbers.forEach((btns,item) => {
-    btns.addEventListener('click', function() {
-        currentNumber += this.id;
-        currentOperand.textContent = Math.trunc(currentNumber);
+operators.forEach((operator, item) => {
+    operator.addEventListener('click', function(btns, items) {
+       if(calculator.operator === '' && calculator.displayValue !== '') {
+        calculator.firstValue = Number(calculator.displayValue);
+        historyOperand.textContent = `${calculator.firstValue} ${this.value}`;
+        currentOperand.textContent = '';
+        calculator.displayValue = '';
+        calculator.operator += this.value;
+        console.log(calculator.operator);
+        console.log( typeof(calculator.operator));
+       }
     })
 });
 
-operators.forEach((btns) => {
-    btns.addEventListener('click', function(event){
-        if(currentNumber != '') {
-            historyNumber = currentNumber;
-            historyOperand.textContent = Math.trunc(historyNumber);
-            currentNumber = '';
-            currentOperand.textContent = '';
-            if(this.id === '-' ) {
-                console.log('event minus');
-            }
-        }
-    })
+
+equal.addEventListener('click', function(){
+    calculator.secondValue = Number(calculator.displayValue);
+    console.log(typeof(calculator.secondValue))
+    if(calculator.operator === '-') {
+        calculator.result = calculator.firstValue - calculator.secondValue;
+        historyOperand.textContent = '';
+        currentOperand.textContent = calculator.result
+        console.log(calculator.result);
+        calculator.operator = '';
+        
+    } else if (calculator.operator === '+') {
+        calculator.result = calculator.firstValue + calculator.secondValue;
+        historyOperand.textContent = '';
+        currentOperand.textContent = calculator.result
+        console.log(calculator.result);
+        calculator.operator = '';
+        
+    } else if(calculator.operator === '/') {
+        calculator.result = calculator.firstValue / calculator.secondValue;
+        historyOperand.textContent = '';
+        currentOperand.textContent = calculator.result
+        console.log(calculator.result);
+        calculator.operator = '';
+       
+    } else if(calculator.operator === '*') {
+        calculator.result = calculator.firstValue * calculator.secondValue;
+        historyOperand.textContent = '';
+        currentOperand.textContent = calculator.result
+        console.log(calculator.result);
+        calculator.operator = '';
+       
+    }
+   
 });
+
+
+
+
+
+
+
 
 
 

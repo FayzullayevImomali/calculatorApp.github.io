@@ -11,10 +11,11 @@ let currentOperand = document.querySelector('.current-operand');
 let historyOperand = document.querySelector('.previous-operand');
 let dotBtn = document.querySelector('.dot');
 let equal = document.querySelector('.equal');
+let clearbtn = document.querySelector('#clear');
 
 let historyNumber = '';
 let currentNumber = '';
-let stopCalculate = true;
+let stopCalculate = false;
 
 const calculator = {
     firstValue: '',
@@ -26,12 +27,13 @@ const calculator = {
 
 
 numbers.forEach((btns, items) => {
-    if(stopCalculate === true) {
+    if(stopCalculate === false) {
         btns.addEventListener('click', function () {
-            calculator.displayValue += this.value
-            // console.log(calculator.firstValue)
-            currentOperand.textContent = calculator.displayValue
+            calculator.displayValue += this.value;
+            currentOperand.textContent = calculator.displayValue;
         });
+    } else {
+        return;
     }
 });
 
@@ -56,19 +58,24 @@ operators.forEach((operator, item) => {
         console.log(calculator.operator);
         console.log( typeof(calculator.operator));
        }
-    })
+    });
 });
 
 
 equal.addEventListener('click', function(){
     calculator.secondValue = Number(calculator.displayValue);
-    console.log(typeof(calculator.secondValue))
+    calculator.displayValue.textContent = '';
+    console.log(typeof(calculator.secondValue));
+    stopCalculate = true;
+    console.log(stopCalculate);
     if(calculator.operator === '-') {
         calculator.result = calculator.firstValue - calculator.secondValue;
         historyOperand.textContent = '';
         currentOperand.textContent = calculator.result
         console.log(calculator.result);
         calculator.operator = '';
+        calculator.displayValue = '';
+        
         
     } else if (calculator.operator === '+') {
         calculator.result = calculator.firstValue + calculator.secondValue;
@@ -76,6 +83,8 @@ equal.addEventListener('click', function(){
         currentOperand.textContent = calculator.result
         console.log(calculator.result);
         calculator.operator = '';
+        calculator.displayValue = '';
+       
         
     } else if(calculator.operator === '/') {
         calculator.result = calculator.firstValue / calculator.secondValue;
@@ -83,6 +92,7 @@ equal.addEventListener('click', function(){
         currentOperand.textContent = calculator.result
         console.log(calculator.result);
         calculator.operator = '';
+        calculator.displayValue = '';
        
     } else if(calculator.operator === '*') {
         calculator.result = calculator.firstValue * calculator.secondValue;
@@ -90,10 +100,23 @@ equal.addEventListener('click', function(){
         currentOperand.textContent = calculator.result
         console.log(calculator.result);
         calculator.operator = '';
-       
+        stopCalculate = true;
+        calculator.displayValue = ''; 
     }
    
 });
+
+const clear = function () {
+    calculator.displayValue = '';
+    calculator.firstValue = '';
+    calculator.secondValue = '';
+    currentOperand.textContent = '';
+    historyOperand.textContent = '';
+    calculator.operator = '';
+    calculator.result = '';
+};
+
+clearbtn.addEventListener('click', clear);
 
 
 

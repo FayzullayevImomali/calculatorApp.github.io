@@ -1,9 +1,3 @@
-// browser.runtime.onMessage.addListener(message => {
-//     console.log("background: onMessage", message);
-  
-//     // Add this line:
-//     return Promise.resolve("Dummy response to keep the console quiet");
-//   });
 
 const numbers = document.querySelectorAll('.numbers');
 const operators = document.querySelectorAll('.operators');
@@ -55,7 +49,6 @@ operators.forEach((operator, item) => {
         currentOperand.textContent = '';
         calculator.displayValue = '';
         calculator.operator += this.value;
-        
        }
     });
 });
@@ -116,6 +109,8 @@ const clear = function () {
 };
 
 clearbtn.addEventListener('click', clear);
+
+
 
 
 

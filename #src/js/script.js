@@ -55,8 +55,7 @@ operators.forEach((operator, item) => {
         currentOperand.textContent = '';
         calculator.displayValue = '';
         calculator.operator += this.value;
-        console.log(calculator.operator);
-        console.log( typeof(calculator.operator));
+        
        }
     });
 });
